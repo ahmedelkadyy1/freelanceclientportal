@@ -55,10 +55,149 @@ const DEFAULT_USERS: (User & { password_hash: string })[] = [
   },
 ];
 
-const DEFAULT_PROJECTS: Project[] = [];
-const DEFAULT_MESSAGES: Message[] = [];
-const DEFAULT_FILES: FileMetadata[] = [];
-const DEFAULT_ACTIVITY: ActivityLog[] = [];
+const DEFAULT_PROJECTS: Project[] = [
+  {
+    id: 'p-as-dental',
+    title: 'Al-Safa Dental Clinic Patient Portal',
+    description: 'A premium patient appointment booking system & electronic health record portal. Crafted with medical grid layouts, specialized treatment timeline visualization, and secure private radiology attachments.',
+    client_id: 'u-client-acme',
+    is_public: true,
+    status: 'active',
+    progress: 75,
+    deadline: '2026-06-30',
+    category: 'Web System',
+    budget: '$24,500'
+  },
+  {
+    id: 'p-aura-mindset',
+    title: 'Aura Soundscape Companion App',
+    description: 'A dark-mode oriented mindfulness platform built with canvas animation loops, local key-value sound persistence, and detailed health metrics streaming telemetry.',
+    client_id: 'u-client-spark',
+    is_public: true,
+    status: 'ongoing',
+    progress: 40,
+    deadline: '2026-07-15',
+    category: 'Mobile Engine',
+    budget: '$32,000'
+  },
+  {
+    id: 'p-velo-fleet',
+    title: 'Velo Logistics Fleet Telemetry Dashboard',
+    description: 'An enterprise transit coordinate tracker and dispatch board utilizing interactive charts, fast filter arrays, and secure driver communication routes.',
+    client_id: 'u-client-acme',
+    is_public: true,
+    status: 'completed',
+    progress: 100,
+    deadline: '2026-04-10',
+    category: 'Data Analytics',
+    budget: '$45,000'
+  },
+  {
+    id: 'p-nova-carbon',
+    title: 'Nova Carbon Audit Infrastructure',
+    description: 'A public-facing ecological audit portal to measure, store, and display carbon asset index computations with printable cert export pathways.',
+    client_id: null,
+    is_public: true,
+    status: 'completed',
+    progress: 100,
+    deadline: '2026-05-01',
+    category: 'Public SaaS',
+    budget: '$18,500'
+  }
+];
+
+const DEFAULT_MESSAGES: Message[] = [
+  {
+    id: 'm-seed-1',
+    project_id: 'p-as-dental',
+    sender_id: 'u-admin-1',
+    sender_name: 'David Vance',
+    sender_role: 'admin',
+    content: 'Hi Sarah, I have uploaded the updated appointment booking flow blueprint under the Files vault. Please check out patient_booking_v1.pdf when you have a moment!',
+    timestamp: '2026-05-27T09:30:00Z'
+  },
+  {
+    id: 'm-seed-2',
+    project_id: 'p-as-dental',
+    sender_id: 'u-client-acme',
+    sender_name: 'Sarah Jenkins',
+    sender_role: 'client',
+    content: 'Thanks David! The patient timeline adjustments look spectacular. I will review the file right away to see if it targets the new consult regulations.',
+    timestamp: '2026-05-27T14:15:00Z'
+  },
+  {
+    id: 'm-seed-3',
+    project_id: 'p-as-dental',
+    sender_id: 'u-admin-1',
+    sender_name: 'David Vance',
+    sender_role: 'admin',
+    content: 'Absolutely. We bound the timing slots helper to check clinic standard calendar restrictions. Let me know if we need to adjust the automatic margins.',
+    timestamp: '2026-05-27T16:45:00Z'
+  },
+  {
+    id: 'm-seed-4',
+    project_id: 'p-aura-mindset',
+    sender_id: 'u-admin-1',
+    sender_name: 'David Vance',
+    sender_role: 'admin',
+    content: 'Hey Leo! The SVG vector path morph loop is complete and streams at 60fps on mobile Safari. Let me know if you would like me to compile a test build page.',
+    timestamp: '2026-05-28T08:00:00Z'
+  }
+];
+
+const DEFAULT_FILES: FileMetadata[] = [
+  {
+    id: 'f-seed-1',
+    project_id: 'p-as-dental',
+    name: 'patient_booking_v1.pdf',
+    size: '1.8 MB',
+    uploaded_at: '2026-05-27T09:28:00Z',
+    uploader_name: 'David Vance',
+    uploader_role: 'admin',
+    file_data: 'data:application/pdf;base64,JVBERi0xLjQKJSDi48clN0YXJ0X0RlbnRhbF9QREZfTW9ja3VwCg=='
+  },
+  {
+    id: 'f-seed-2',
+    project_id: 'p-as-dental',
+    name: 'dental_clinic_branding_guidelines.pdf',
+    size: '4.2 MB',
+    uploaded_at: '2026-05-25T11:00:00Z',
+    uploader_name: 'Sarah Jenkins',
+    uploader_role: 'client',
+    file_data: 'data:application/pdf;base64,JVBERi0xLjQKJSDi48clN0YXJ0X0JyYW5kaW5nX01vY2t1cAo='
+  }
+];
+
+const DEFAULT_ACTIVITY: ActivityLog[] = [
+  {
+    id: 'a-seed-1',
+    project_id: 'p-as-dental',
+    text: 'David Vance uploaded client asset: patient_booking_v1.pdf',
+    timestamp: '2026-05-27T09:28:00Z',
+    user_name: 'David Vance'
+  },
+  {
+    id: 'a-seed-2',
+    project_id: 'p-as-dental',
+    text: 'Sarah Jenkins downloaded patient_booking_v1.pdf to study consultation flows',
+    timestamp: '2026-05-27T14:20:00Z',
+    user_name: 'Sarah Jenkins'
+  },
+  {
+    id: 'a-seed-3',
+    project_id: 'p-as-dental',
+    text: 'David Vance adjusted milestone deadline to June 30th with updated requirements',
+    timestamp: '2026-05-27T16:50:00Z',
+    user_name: 'David Vance'
+  },
+  {
+    id: 'a-seed-4',
+    project_id: 'p-aura-mindset',
+    text: 'David Vance registered vector morph path soundscape generator pipeline',
+    timestamp: '2026-05-28T07:55:00Z',
+    user_name: 'David Vance'
+  }
+];
 
 // Helper to load/save datastore
 function loadData(): DataStore {
@@ -90,6 +229,15 @@ function loadData(): DataStore {
         loaded.messages = (loaded.messages || []).filter(m => !legacyFakeIds.includes(m.project_id));
         loaded.files = (loaded.files || []).filter(f => !legacyFakeIds.includes(f.project_id));
         loaded.activityLogs = (loaded.activityLogs || []).filter(a => !legacyFakeIds.includes(a.project_id));
+        updated = true;
+      }
+
+      // Check if datastore project archive is clean or empty, automatically seed with premium portfolio projects
+      if (!loaded.projects || loaded.projects.length === 0) {
+        loaded.projects = DEFAULT_PROJECTS;
+        loaded.messages = DEFAULT_MESSAGES;
+        loaded.files = DEFAULT_FILES;
+        loaded.activityLogs = DEFAULT_ACTIVITY;
         updated = true;
       }
 
@@ -579,6 +727,22 @@ app.post('/api/projects/:id/files', authenticateUser, (req, res) => {
   const { name, size, data } = req.body;
   if (!name || !size) {
     return res.status(400).json({ error: 'Missing mandatory parameters (name, size).' });
+  }
+
+  // 1. EXTENSION SECURITY PROTOCOL
+  const dangerousExtensions = ['.exe', '.sh', '.bat', '.cmd', '.js', '.vbs', '.msi', '.scr', '.com', '.htm', '.html', '.php', '.py', '.pl'];
+  const ext = path.extname(name).toLowerCase();
+  if (dangerousExtensions.includes(ext)) {
+    return res.status(400).json({ 
+      error: 'Security block: Dangerous file extension detected. Executable, script, or markup files are forbidden to protect the workspace environment.' 
+    });
+  }
+
+  // 2. SIZE CONSTRAINTS (Max 8MB raw size)
+  if (data && data.length > 12 * 1024 * 1024) { // Roughly ~8MB binary is 11-12MB Base64 string
+    return res.status(400).json({ 
+      error: 'Upload constraints exceeded: Individual files must remain below 8 MB payload limits for memory hygiene.' 
+    });
   }
 
   const newFile: FileMetadata = {
